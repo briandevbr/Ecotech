@@ -1,0 +1,265 @@
+/* ---------- Variáveis ---------- */
+:root {
+    --bg: #000;
+    --text: #fff;
+    --header-h: 56px;
+    --font-serif: 'Bodoni Moda', serif;
+    --font-sans: 'Montserrat', sans-serif;
+}
+
+/* ---------- Base ---------- */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    height: 100%;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-sans);
+    overflow: hidden;
+}
+
+/* ---------- Animações ---------- */
+/* Estado inicial: tudo invisível */
+.reveal,
+.splash {
+    opacity: 0;
+}
+
+/* Quando a página carrega, cada elemento roda a sua animação */
+.is-loaded .reveal {
+    animation: fade-in 1.4s ease-out var(--delay, 0s) both;
+}
+
+.is-loaded .reveal--up {
+    animation-name: fade-up;
+}
+
+.is-loaded .splash {
+    animation: splash 3s ease-in-out 0.6s both;
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fade-up {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@keyframes splash {
+    0% {
+        opacity: 0;
+    }
+    30% {
+        opacity: 1;
+    }
+    70% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+/* ---------- Linha do tempo (atrasos) ---------- */
+.gallery__item--main {
+    --delay: 4s;
+}
+.gallery__item--side {
+    --delay: 4s;
+}
+.hero__text {
+    --delay: 4.9s;
+}
+.header {
+    --delay: 5.8s;
+}
+
+/* ---------- Logo de abertura ---------- */
+.splash {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: grid;
+    place-items: center;
+    background: #000;
+    pointer-events: none;
+}
+
+.splash img {
+    width: min(60vw, 320px);
+    height: auto;
+}
+
+/* ---------- Header ---------- */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    height: var(--header-h);
+    padding: 0 clamp(16px, 4vw, 32px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--bg);
+    font-size: 0.6875rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+}
+
+.header__brand {
+    color: var(--text);
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-decoration: none;
+}
+
+.header__nav {
+    display: flex;
+    align-items: center;
+    gap: clamp(16px, 3vw, 32px);
+}
+
+.header__icon {
+    fill: var(--text);
+}
+
+.header__link {
+    background: none;
+    border: 0;
+    padding: 0;
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+    color: var(--text);
+    text-decoration: none;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: opacity 0.3s;
+}
+
+.header__link:hover {
+    opacity: 1;
+}
+
+/* ---------- Hero ---------- */
+.hero {
+    position: relative;
+    height: 100vh;
+}
+
+/* ---------- Galeria de fotos ---------- */
+.gallery {
+    position: absolute;
+    inset: var(--header-h) 0 0;
+    padding-inline: 3vw;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.gallery__item {
+    margin: 0;
+    overflow: hidden;
+    /* esmaece a parte de baixo da foto até sumir */
+    -webkit-mask-image: linear-gradient(to bottom, #000 60%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 60%, transparent 100%);
+}
+
+.gallery__item img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.gallery__item--main {
+    width: 34%;
+    height: 70vh;
+}
+
+.gallery__item--side {
+    width: 30%;
+    height: 58vh;
+    margin-top: 6vh;
+}
+
+/* fotos laterais: desfocadas e escurecidas */
+.gallery__item--side img {
+    filter: blur(6px) brightness(0.5);
+    transform: scale(1.08);
+}
+
+/* ---------- Textos ---------- */
+.hero__text {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    right: 0;
+    width: min(90%, 760px);
+    margin-inline: auto;
+    text-align: center;
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.6);
+}
+
+.hero__eyebrow {
+    margin: 0 0 1rem;
+    font-size: 0.625rem;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+}
+
+.hero__title {
+    margin: 0;
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: clamp(3rem, 9vw, 7.5rem);
+    line-height: 1;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.hero__description {
+    max-width: 42ch;
+    margin: 1.25rem auto 0;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    line-height: 1.6;
+    letter-spacing: 0.08em;
+}
+
+/* ---------- Celular ---------- */
+@media (max-width: 700px) {
+    .gallery__item--side {
+        display: none;
+    }
+
+    .gallery__item--main {
+        width: 80%;
+    }
+}

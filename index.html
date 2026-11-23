@@ -1,66 +1,86 @@
 <!doctype html>
 <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ecotech</title>
-    <link rel="stylesheet" href="./style.css" />
-    <link rel="icon" href="./assets/images/logo/logo.png">
-  </head>
-  <body>
-    <header>
-      <a href="./index.html">
-        <img src="./assets/images/logo/logo.png" alt="Logo do site" width="75px" />
-      </a>
-      <h1>EcoTech</h1>
-    </header>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>EcoTech</title>
+        <link rel="stylesheet" href="./style.css" />
+        <link rel="icon" href="./assets/images/logo/logo.png" />
+    </head>
+    <body>
+        <header>
+            <a href="./index.html" class="brand-link">
+                <img
+                    src="./assets/images/logo/logo.png"
+                    alt="Logo do EcoTech"
+                    width="48"
+                    height="48"
+                />
+                <h1>EcoTech</h1>
+            </a>
+        </header>
 
-    <main class="main-container">
+        <main class="main-container">
+            <section class="text-content" aria-labelledby="sobre-titulo">
+                <h2 id="sobre-titulo">Apresentação</h2>
+                <p>
+                    O EcoTech é uma plataforma educativa que responde dúvidas sobre meio ambiente
+                    por meio de inteligência artificial.
+                </p>
 
-      <section class="text-content">
-       <section>
-  <h2>Apresentação</h2>
-  <p>O EcoTech é uma plataforma educativa que responde dúvidas sobre meio ambiente por meio de inteligência artificial.</p>
+                <h2>Objetivos</h2>
+                <ul>
+                    <li>Responder dúvidas sobre meio ambiente.</li>
+                    <li>Divulgar informações sobre reciclagem e preservação.</li>
+                    <li>Incentivar práticas sustentáveis.</li>
+                </ul>
 
-  <h2>Objetivos</h2>
-  <ul>
-    <li>Responder dúvidas sobre meio ambiente.</li>
-    <li>Divulgar informações sobre reciclagem e preservação.</li>
-    <li>Incentivar práticas sustentáveis.</li>
-  </ul>
+                <h2>Funcionamento</h2>
+                <ol>
+                    <li>O usuário digita sua dúvida.</li>
+                    <li>A inteligência artificial responde.</li>
+                </ol>
 
-  <h2>Funcionamento</h2>
-  <ol>
-    <li>O usuário digita sua dúvida.</li>
-    <li>A inteligência artificial responde.</li>
-  </ol>
+                <h2>Público-alvo</h2>
+                <p>
+                    Estudantes, professores, famílias e todos os interessados em sustentabilidade.
+                </p>
+            </section>
 
-  <h2>Público-alvo</h2>
-  <p>Estudantes, professores, famílias e todos os interessados em sustentabilidade.</p>
+            <section class="perguntas" aria-label="Fazer pergunta">
+                <form class="pergunta-form" id="pergunta-form">
+                    <label for="pergunta-input" class="sr-only"
+                        >Digite sua pergunta sobre meio ambiente</label
+                    >
+                    <input
+                        id="pergunta-input"
+                        type="text"
+                        placeholder="Digite sua pergunta sobre meio ambiente"
+                        required
+                    />
+                    <button type="submit">Enviar</button>
+                </form>
+                <div class="respostas" id="respostas" aria-live="polite"></div>
+            </section>
 
+            <aside class="globe-container" aria-label="Globo interativo">
+                <iframe
+                    src="https://vasturiano.github.io/three-globe/example/custom-material/"
+                    title="Globo interativo sobre o planeta Terra"
+                    loading="lazy"
+                    allowfullscreen
+                    scrolling="no"
+                ></iframe>
+            </aside>
 
-</section>
-      </section>
+            <div class="info-action">
+                <a href="./assets/infopage.html" class="infobtn"
+                    >Conheça mais sobre o Meio Ambiente.</a
+                >
+            </div>
+        </main>
 
-      <section class="perguntas">
-        <input
-          type="text" placeholder="Digite sua pergunta sobre meio ambiente"/>
-            <button>Enviar</button>
-        </section>
-
-      <aside class="globe-container">
-        <iframe
-          src=https://vasturiano.github.io/three-globe/example/custom-material/
-          loading="lazy"
-          allowfullscreen
-          scrolling="no"
-        ></iframe>
-      </aside>
-      <a href="./assets/infopage.html" class="infobtn">Conheça mais sobre o Meio Ambiente.</a>
-
-
-        <script src="./assets/js/ai.js"></script>
-        <script src="./assets/js/config-exemple.js"></script>
-    </main>
-  </body>
+        <script src="./assets/js/config-exemple.js" defer></script>
+        <script src="./assets/js/ai.js" defer></script>
+    </body>
 </html>

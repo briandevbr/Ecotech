@@ -1,4 +1,6 @@
-* {
+*,
+*::before,
+*::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -16,26 +18,49 @@ body {
     flex-direction: column;
 }
 
+/* Utilitário para leitores de tela */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
 header {
     padding: 16px 24px;
     background-color: #161817;
     border-bottom: 1px solid #262928;
-    display: flex;
+    flex-shrink: 0;
+}
+
+.brand-link {
+    display: inline-flex;
     align-items: center;
     gap: 12px;
+    text-decoration: none;
+}
+
+.brand-link img {
+    display: block;
+    object-fit: contain;
 }
 
 header h1 {
     font-size: 1.65rem;
     font-weight: 800;
-    letter-spacing: -0.03em; /* Deixa as letras mais unidas, com cara de logotipo */
+    letter-spacing: -0.03em;
     background: linear-gradient(90deg, #22c55e, #38bdf8);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
-/* MOBILE FIRST: tudo em uma coluna (uma coisa embaixo da outra) */
+/* MOBILE FIRST */
 .main-container {
     flex: 1;
     display: grid;
@@ -44,19 +69,36 @@ header h1 {
     padding: 20px;
 }
 
-.text-content p {
+.text-content h2 {
+    font-size: 1.05rem;
+    margin-top: 14px;
+    margin-bottom: 6px;
+    color: #4ade80;
+}
+
+.text-content h2:first-child {
+    margin-top: 0;
+}
+
+.text-content p,
+.text-content li {
     line-height: 1.5;
     color: #e4e4e7;
 }
 
-.perguntas {
-    display: flex;
-    gap: 8px;
-    margin-top: 10px;
+.text-content ul,
+.text-content ol {
+    padding-left: 20px;
 }
 
-.perguntas input {
+.pergunta-form {
+    display: flex;
+    gap: 8px;
+}
+
+.pergunta-form input {
     flex: 1;
+    min-width: 0;
     padding: 10px 14px;
     border-radius: 6px;
     border: 1px solid #3f3f46;
@@ -64,7 +106,14 @@ header h1 {
     color: #fff;
 }
 
-.perguntas button {
+.pergunta-form input:focus-visible,
+.pergunta-form button:focus-visible,
+.infobtn:focus-visible {
+    outline: 2px solid #22c55e;
+    outline-offset: 2px;
+}
+
+.pergunta-form button {
     padding: 10px 18px;
     border: none;
     border-radius: 6px;
@@ -74,47 +123,56 @@ header h1 {
     cursor: pointer;
 }
 
+.pergunta-form button:hover {
+    background-color: #15803d;
+}
+
+/* Globo sem moldura e com escala inicial maior */
 .globe-container {
     width: 100%;
     min-height: 360px;
+    background: transparent;
     overflow: hidden;
 }
 
 .globe-container iframe {
     width: 100%;
     height: 100%;
+    min-height: 360px;
     border: none;
+    background: transparent;
     display: block;
+    transform: scale(1.25);
+    transform-origin: center center;
 }
+
 .respostas {
-    margin-top: 20px;
+    margin-top: 16px;
     padding: 16px;
     background-color: #091b0f;
+    border: 1px solid #14532d;
     border-radius: 8px;
 }
 
-/* ================================
-   DIVISÃO E ESTILO DAS MENSAGENS
-   (Mesmas classes da appendMessage)
-   ================================ */
+.respostas:empty {
+    display: none;
+}
 
-/* Bloco geral que segura o rótulo + a mensagem */
+/* Mensagens */
 .message-group {
     display: flex;
     flex-direction: column;
-    margin-top: 18px; /* Aumente ou diminua para mudar a distância entre mensagens */
-    padding-top: 12px; /* Espaço interno acima da linha divisória */
-    border-top: 1px solid rgba(148, 163, 184, 0.35); /* Linha sutil dividindo os blocos */
+    margin-top: 18px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(148, 163, 184, 0.35);
 }
 
-/* Remove a linha de cima na primeira mensagem do chat para não sobrar traço no topo */
 .message-group:first-child {
     border-top: none;
     padding-top: 0;
-    margin-top: 4px;
+    margin-top: 0;
 }
 
-/* Texto pequeno em cima da mensagem ("Você" / "IA") */
 .message-label {
     font-size: 0.78rem;
     font-weight: 700;
@@ -122,7 +180,6 @@ header h1 {
     margin-bottom: 6px;
 }
 
-/* Balão base da mensagem */
 .message {
     max-width: 80%;
     padding: 12px 14px;
@@ -131,101 +188,87 @@ header h1 {
     white-space: pre-wrap;
 }
 
-/* --- MENSAGEM DO USUÁRIO (.user) --- */
 .message-group.user .message-label {
     align-self: flex-end;
-    color: #ffff; /* Cor do rótulo "Você" */
+    color: #ffffff;
 }
 
 .message-group.user .message {
     align-self: flex-end;
-    background-color: #aaee39; /* Cor de fundo da sua mensagem */
-    color: black; /* Cor do texto da sua mensagem */
+    background-color: #aaee39;
+    color: #09090b;
     border-bottom-right-radius: 4px;
 }
 
-/* --- MENSAGEM DA IA / OUTRA PESSOA (.bot) --- */
 .message-group.bot .message-label {
     align-self: flex-start;
-    color: #b0e454; /* Cor do rótulo "IA" */
+    color: #b0e454;
 }
 
 .message-group.bot .message {
     align-self: flex-start;
-    background-color: #e2e8f0; /* Cor de fundo da resposta */
-    color: #0f172a; /* Cor do texto da resposta */
-    border-left: 4px solid #0f172a; /* Faixa lateral para diferenciar ainda mais */
+    background-color: #e2e8f0;
+    color: #0f172a;
+    border-left: 4px solid #0f172a;
     border-bottom-left-radius: 4px;
 }
 
-/* DESKTOP (a partir de 768px): 3 blocos empilhados na esquerda + globo na direita */
+.infobtn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 20px;
+    color: #fff;
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-decoration: none;
+    background-color: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+}
+
+.infobtn::before {
+    content: '→';
+    font-size: 1rem;
+}
+
+.infobtn:hover {
+    background-color: rgba(255, 255, 255, 0.14);
+}
+
+/* DESKTOP */
 @media (min-width: 768px) {
+    body {
+        height: 100dvh;
+        overflow: hidden;
+    }
+
     .main-container {
-        grid-template-columns: 1fr 1.2fr;
-        grid-template-rows: auto auto 1fr; /* linhas 1 e 2 só do tamanho do conteúdo! */
-        align-items: start;
-        padding: 32px;
-    }
-
-    .text-content {
-        grid-column: 1;
-        grid-row: 1;
-    }
-
-    .perguntas {
-        grid-column: 1;
-        grid-row: 2;
-    }
-
-    .respostas {
-        grid-column: 1;
-        grid-row: 3; /* Fica logo abaixo da caixa de perguntas! */
-        margin-top: 8px; /* Ajusta a distância entre o input e as respostas */
-        max-height: 55vh; /* Cria rolagem interna quando tiver muitas mensagens */
-        overflow-y: auto;
+        flex: 1;
+        min-height: 0;
+        grid-template-columns: 1fr 1.6fr;
+        grid-template-rows: auto 1fr auto;
+        align-items: stretch;
+        padding: 20px 28px;
     }
 
     .globe-container {
         grid-column: 2;
-        grid-row: 1 / 4; /* Continua ocupando toda a altura da direita */
+        grid-row: 1 / -1;
         height: 100%;
-        min-height: 500px;
-    }
-    .infobtn {
-        position: absolute;
-        bottom: 24px;
-        left: 24px;
-        display: inline-block;
-        padding: 18px 40px 18px 88px;
-        color: #fff;
-        font:
-            bold 14px Arial,
-            sans-serif;
-        text-decoration: none;
-        background: fff1;
-        border: 1px solid #fff4;
-        border-radius: 6px;
-        text-transform: uppercase;
-        letter-spacing: 0, 15em;
+        min-height: 0;
     }
 
-    .infobtn::before {
-        content: 'o';
-        position: absolute;
-        inset: 0 auto 0 0;
-        width: 48px;
-        display: grid;
-        place-items: center;
-        border-right: 1px solid #fff4;
-    }
-    .infobtn:hover {
-        background: #fff2;
+    .globe-container iframe {
+        height: 100%;
+        min-height: 0;
     }
 
-    footer {
-        display: flex;
-        background-color: #1bd075;
-        margin-top: 20px;
-        padding: 20px;
+    .info-action {
+        grid-column: 1;
+        grid-row: 3;
+        align-self: end;
     }
 }

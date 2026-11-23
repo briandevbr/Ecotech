@@ -25,11 +25,29 @@ const conversationHistory = [];
 let lastMessageTime = 0; // Controle do cooldown
 
 function appendMessage(text, sender) {
+  // Cria um bloco que segura o rótulo + a mensagem juntos
+  const wrapper = document.createElement("div");
+  wrapper.classList.add("message-group", sender);
+
+  // Cria o rótulo pequeno em cima (ex: "Você" ou "IA")
+  const label = document.createElement("span");
+  label.classList.add("message-label");
+  label.textContent = sender === "user" ? "You:" : "Ecotech:";
+
+  // Cria a mensagem em si
   const bubble = document.createElement("div");
   bubble.classList.add("message", sender);
   bubble.textContent = text;
-  chatMessages.appendChild(bubble);
+
+  // Junta o rótulo e a mensagem dentro do bloco
+  wrapper.appendChild(label);
+  wrapper.appendChild(bubble);
+
+  // Coloca o bloco na tela e desce a rolagem
+  chatMessages.appendChild(wrapper);
   chatMessages.scrollTop = chatMessages.scrollHeight;
+
+  // Importante: retorna "bubble" porque o seu código usa isso para trocar "Pensando..." pela resposta
   return bubble;
 }
 

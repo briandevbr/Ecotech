@@ -40,7 +40,7 @@ header h1 {
 .perguntas {
   display: flex;
   gap: 8px;
-  margin-top: 300px;
+  margin-top: 30px;
 }
 
 .perguntas input {

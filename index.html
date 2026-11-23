@@ -8,30 +8,35 @@
   </head>
   <body>
     <header>
-      <h1>Ecotech</h1>
+      <a href="index.html">
+        <img src="assets/logo-ecotech.png" alt="Logo do site" width="150px" />
+      </a>
     </header>
 
     <main class="main-container">
+
       <section class="text-content">
         <p>
           EcoTech - Um site educativo que responde dúvidas sobre meio ambiente
           com inteligência artificial para conscientizar todos os usuários.
         </p>
-
-        <input type="text" placeholder="Digite sua dúvida" />
-
-        <a href="#">Acesse o artigo sobre El Niño e La Niña</a>
-        <a href="#">Acesse o artigo sobre</a>
-        <a href="#">Acesse o artigo sobre</a>
       </section>
 
-      <div class="globe-container">
+      <section class="perguntas">
+        <input
+          type="text" placeholder="Digite sua pergunta sobre meio ambiente"/>
+            <button>Enviar</button>
+        </section>
+
+      <aside class="globe-container">
         <iframe
           src=https://vasturiano.github.io/three-globe/example/custom-material/
           loading="lazy"
           allowfullscreen
+          scrolling="no"
         ></iframe>
-      </div>
+      </aside>
+      
     </main>
   </body>
 </html>

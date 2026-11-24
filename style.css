@@ -1,131 +1,136 @@
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-  background-color: #000;
-  color: #fff;
-  font-family: system-ui, -apple-system, sans-serif;
-  min-height: 100dvh;
-  display: flex;
-  flex-direction: column;
+    background-color: #000;
+    color: #fff;
+    font-family:
+        system-ui,
+        -apple-system,
+        sans-serif;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
 }
 
 header {
-  padding: 16px 24px;
-  background-color: #161817;
+    padding: 16px 24px;
+    background-color: #161817;
 }
 
 header h1 {
-  color: #22c55e;
-  font-size: 1.5rem;
+    color: #22c55e;
+    font-size: 1.5rem;
 }
 
 /* MOBILE FIRST: tudo em uma coluna (uma coisa embaixo da outra) */
 .main-container {
-  flex: 1;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 20px;
-  padding: 20px;
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 20px;
 }
 
 .text-content p {
-  line-height: 1.5;
-  color: #e4e4e7;
+    line-height: 1.5;
+    color: #e4e4e7;
 }
 
 .perguntas {
-  display: flex;
-  gap: 8px;
-  margin-top: 300px;
+    display: flex;
+    gap: 8px;
+    margin-top: 300px;
 }
 
 .perguntas input {
-  flex: 1;
-  padding: 10px 14px;
-  border-radius: 6px;
-  border: 1px solid #3f3f46;
-  background-color: #09090b;
-  color: #fff;
+    flex: 1;
+    padding: 10px 14px;
+    border-radius: 6px;
+    border: 1px solid #3f3f46;
+    background-color: #09090b;
+    color: #fff;
 }
 
 .perguntas button {
-  padding: 10px 18px;
-  border: none;
-  border-radius: 6px;
-  background-color: #16a34a;
-  color: #fff;
-  font-weight: 600;
-  cursor: pointer;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 6px;
+    background-color: #16a34a;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
 }
 
 .globe-container {
-  width: 100%;
-  min-height: 360px;
-  overflow: hidden;
+    width: 100%;
+    min-height: 360px;
+    overflow: hidden;
 }
 
 .globe-container iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
-  display: block;
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
 }
 
 /* DESKTOP (a partir de 768px): 2 sections empilhadas na esquerda + aside na direita */
 @media (min-width: 768px) {
-  .main-container {
-    grid-template-columns: 1fr 1.2fr; /* esquerda: textos/perguntas | direita: globo */
-    grid-template-rows: auto 1fr;     /* linha 1: text-content | linha 2: perguntas */
-    align-items: start;
-    padding: 32px;
-  }
+    .main-container {
+        grid-template-columns: 1fr 1.2fr; /* esquerda: textos/perguntas | direita: globo */
+        grid-template-rows: auto 1fr; /* linha 1: text-content | linha 2: perguntas */
+        align-items: start;
+        padding: 32px;
+    }
 
-  .text-content {
-    grid-column: 1;
-    grid-row: 1;
-  }
+    .text-content {
+        grid-column: 1;
+        grid-row: 1;
+    }
 
-  .perguntas {
-    grid-column: 1;
-    grid-row: 2;
-  }
+    .perguntas {
+        grid-column: 1;
+        grid-row: 2;
+    }
 
-  .globe-container {
-    grid-column: 2;
-    grid-row: 1 / 3; /* ocupa da linha 1 até o final da linha 2 */
-    height: 100%;
-    min-height: 500px;
-  }
-  .infobtn{
-    position: absolute;
-    bottom:24px;
-    left:24px;
-    display: inline-block;
-    padding: 18px 40px 18px 88px;
-    color: #fff;
-    font: bold 14px Arial, sans-serif;
-    text-decoration: none;
-    background: fff1;
-    border: 1px solid #fff4;
-    border-radius: 6px;
-    text-transform: uppercase;
-    letter-spacing: 0,15em;
-  }
+    .globe-container {
+        grid-column: 2;
+        grid-row: 1 / 3; /* ocupa da linha 1 até o final da linha 2 */
+        height: 100%;
+        min-height: 500px;
+    }
+    .infobtn {
+        position: absolute;
+        bottom: 24px;
+        left: 24px;
+        display: inline-block;
+        padding: 18px 40px 18px 88px;
+        color: #fff;
+        font:
+            bold 14px Arial,
+            sans-serif;
+        text-decoration: none;
+        background: fff1;
+        border: 1px solid #fff4;
+        border-radius: 6px;
+        text-transform: uppercase;
+        letter-spacing: 0, 15em;
+    }
 
-  .infobtn::before {
-    content: "o";
-    position: absolute;
-    inset: 0 auto 0 0;
-    width: 48px;
-    display: grid;
-    place-items: center;
-    border-right: 1px solid #fff4;
-  }
-  .infobtn:hover {
-    background: #fff2;
-  }
+    .infobtn::before {
+        content: 'o';
+        position: absolute;
+        inset: 0 auto 0 0;
+        width: 48px;
+        display: grid;
+        place-items: center;
+        border-right: 1px solid #fff4;
+    }
+    .infobtn:hover {
+        background: #fff2;
+    }
 }

@@ -46,22 +46,17 @@
                     Estudantes, professores, famílias e todos os interessados em sustentabilidade.
                 </p>
             </section>
-
-            <section class="perguntas" aria-label="Fazer pergunta">
-                <form class="pergunta-form" id="pergunta-form">
-                    <label for="pergunta-input" class="sr-only"
-                        >Digite sua pergunta sobre meio ambiente</label
-                    >
-                    <input
-                        id="pergunta-input"
-                        type="text"
-                        placeholder="Digite sua pergunta sobre meio ambiente"
-                        required
-                    />
-                    <button type="submit">Enviar</button>
-                </form>
-                <div class="respostas" id="respostas" aria-live="polite"></div>
-            </section>
+            <section id="chat-messages" class="respostas" aria-live="polite"></section>
+     <form id="chat-form" class="perguntas" aria-label="Formulário de perguntas">
+      <input
+        id="user-input"
+        type="text"
+        placeholder="Digite sua dúvida sobre meio ambiente..."
+        autocomplete="off"
+        required
+      />
+      <button type="submit">Enviar</button>
+    </form>
 
             <aside class="globe-container" aria-label="Globo interativo">
                 <iframe
@@ -75,12 +70,11 @@
 
             <div class="info-action">
                 <a href="./assets/infopage.html" class="infobtn"
-                    >Conheça mais sobre o Meio Ambiente.</a
-                >
+                    >Conheça mais sobre o Meio Ambiente.</a>
             </div>
         </main>
 
-        <script src="./assets/js/config-exemple.js" defer></script>
+        <script src="./assets/js/config.js" defer></script>
         <script src="./assets/js/ai.js" defer></script>
     </body>
 </html>

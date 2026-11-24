@@ -6,6 +6,10 @@
         <title>EcoTech</title>
         <link rel="stylesheet" href="./style.css" />
         <link rel="icon" href="./assets/images/logo/logo.png" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        />
     </head>
     <body>
         <header>
@@ -18,6 +22,7 @@
                 />
                 <h1>EcoTech</h1>
             </a>
+            <a href=""><i class="fa-regular fa-sun"></i></a>
         </header>
 
         <main class="main-container">
@@ -47,16 +52,16 @@
                 </p>
             </section>
             <section id="chat-messages" class="respostas" aria-live="polite"></section>
-     <form id="chat-form" class="perguntas" aria-label="Formulário de perguntas">
-      <input
-        id="user-input"
-        type="text"
-        placeholder="Digite sua dúvida sobre meio ambiente..."
-        autocomplete="off"
-        required
-      />
-      <button type="submit">Enviar</button>
-    </form>
+            <form id="chat-form" class="perguntas" aria-label="Formulário de perguntas">
+                <input
+                    id="user-input"
+                    type="text"
+                    placeholder="Digite sua dúvida sobre meio ambiente..."
+                    autocomplete="off"
+                    required
+                />
+                <button type="submit">Enviar</button>
+            </form>
 
             <aside class="globe-container" aria-label="Globo interativo">
                 <iframe
@@ -70,9 +75,14 @@
 
             <div class="info-action">
                 <a href="./assets/infopage.html" class="infobtn"
-                    >Conheça mais sobre o Meio Ambiente.</a>
+                    >Conheça mais sobre o Meio Ambiente.</a
+                >
             </div>
         </main>
+
+        <footer>
+            <a href="https://github.com/briandevbr/Ecotech">Repositório</a>
+        </footer>
 
         <script src="./assets/js/config.js" defer></script>
         <script src="./assets/js/ai.js" defer></script>

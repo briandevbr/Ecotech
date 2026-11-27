@@ -64,6 +64,9 @@
                 aria-label="Formulário de perguntas"
                 @submit.prevent="handleSubmit"
             >
+                <label for="user-input" class="sr-only">
+                    Digite sua dúvida sobre meio ambiente
+                </label>
                 <input
                     id="user-input"
                     ref="userInputRef"
@@ -85,7 +88,6 @@
                     title="Globo interativo sobre o planeta Terra"
                     loading="lazy"
                     allowfullscreen
-                    scrolling="no"
                 ></iframe>
             </aside>
 

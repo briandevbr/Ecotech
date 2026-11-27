@@ -1,5 +1,5 @@
-// Puxa a chave do arquivo config.js (que está no .gitignore)
-const API_KEY = CONFIG.GEMINI_API_KEY;
+// Puxa a chave do arquivo config.js (carregado via <script> no index.html e listado no .gitignore)
+const API_KEY = window.CONFIG?.GEMINI_API_KEY;
 
 // [PROTEÇÃO 1] Fallback de modelos gratuitos com cotas separadas
 const MODELS = [
@@ -7,11 +7,6 @@ const MODELS = [
   "gemini-3.5-flash-lite",
   "gemini-flash-latest"
 ];
-
-const chatForm = document.getElementById("chat-form");
-const userInput = document.getElementById("user-input");
-const submitButton = chatForm.querySelector("button");
-const chatMessages = document.getElementById("chat-messages");
 
 const systemInstruction = {
   parts: [
@@ -30,33 +25,6 @@ Regras de comportamento:
 const conversationHistory = [];
 let lastMessageTime = 0; // Controle do cooldown
 
-function appendMessage(text, sender) {
-  // Cria um bloco que segura o rótulo + a mensagem juntos
-  const wrapper = document.createElement("div");
-  wrapper.classList.add("message-group", sender);
-
-  // Cria o rótulo pequeno em cima (ex: "Você" ou "IA")
-  const label = document.createElement("span");
-  label.classList.add("message-label");
-  label.textContent = sender === "user" ? "You:" : "Ecotech:";
-
-  // Cria a mensagem em si
-  const bubble = document.createElement("div");
-  bubble.classList.add("message", sender);
-  bubble.textContent = text;
-
-  // Junta o rótulo e a mensagem dentro do bloco
-  wrapper.appendChild(label);
-  wrapper.appendChild(bubble);
-
-  // Coloca o bloco na tela e desce a rolagem
-  chatMessages.appendChild(wrapper);
-  chatMessages.scrollTop = chatMessages.scrollHeight;
-
-  // Importante: retorna "bubble" porque o seu código usa isso para trocar "Pensando..." pela resposta
-  return bubble;
-}
-
 // [PROTEÇÃO 5] Traduz códigos de erro técnicos para mensagens amigáveis
 function formatFriendlyError(status, fallbackMessage) {
   if (status === 429) {
@@ -71,7 +39,20 @@ function formatFriendlyError(status, fallbackMessage) {
   return fallbackMessage || "Não foi possível obter resposta agora. Verifique sua conexão.";
 }
 
-async function sendToGemini(promptText) {
+export function validarCooldown(cooldownMs = 2000) {
+  const now = Date.now();
+  if (now - lastMessageTime < cooldownMs) {
+    return false;
+  }
+  lastMessageTime = now;
+  return true;
+}
+
+export async function sendToGemini(promptText) {
+  if (!API_KEY || API_KEY === "COLE_SUA_CHAVE_AQUI") {
+    throw new Error("Erro de autenticação na chave da API. Verifique o arquivo config.js.");
+  }
+
   conversationHistory.push({
     role: "user",
     parts: [{ text: promptText }]
@@ -143,38 +124,5 @@ async function sendToGemini(promptText) {
 
   // Remove a mensagem do usuário se todas as tentativas falharem
   conversationHistory.pop();
-  throw new Error(lastErrorMessage);
+  throw new Error(lastErrorMessage || "Não foi possível obter resposta agora.");
 }
-
-chatForm.addEventListener("submit", async (event) => {
-  event.preventDefault();
-
-  const text = userInput.value.trim();
-  if (!text) return;
-
-  // [PROTEÇÃO 3] Cooldown anti-spam de 2 segundos entre mensagens
-  const now = Date.now();
-  if (now - lastMessageTime < 2000) {
-    appendMessage("Aguarde 2 segundos antes de enviar outra pergunta.", "bot");
-    return;
-  }
-  lastMessageTime = now;
-
-  appendMessage(text, "user");
-  userInput.value = "";
-  userInput.disabled = true;
-  if (submitButton) submitButton.disabled = true;
-
-  const loadingBubble = appendMessage("Pensando...", "bot");
-
-  try {
-    const reply = await sendToGemini(text);
-    loadingBubble.textContent = reply;
-  } catch (error) {
-    loadingBubble.textContent = error.message;
-  } finally {
-    userInput.disabled = false;
-    if (submitButton) submitButton.disabled = false;
-    userInput.focus();
-  }
-});

@@ -20,7 +20,7 @@
             </a>
         </header>
 
-        <main class="main-container">
+        <main id="app" class="main-container">
             <section class="text-content" aria-labelledby="sobre-titulo">
                 <h2 id="sobre-titulo">Apresentação</h2>
                 <p>
@@ -47,21 +47,37 @@
                 </p>
             </section>
 
-            <section class="perguntas" aria-label="Fazer pergunta">
-                <form class="pergunta-form" id="pergunta-form">
-                    <label for="pergunta-input" class="sr-only"
-                        >Digite sua pergunta sobre meio ambiente</label
-                    >
-                    <input
-                        id="pergunta-input"
-                        type="text"
-                        placeholder="Digite sua pergunta sobre meio ambiente"
-                        required
-                    />
-                    <button type="submit">Enviar</button>
-                </form>
-                <div class="respostas" id="respostas" aria-live="polite"></div>
+            <section id="chat-messages" ref="chatMessagesRef" class="respostas" aria-live="polite">
+                <div
+                    v-for="msg in messages"
+                    :key="msg.id"
+                    :class="['message-group', msg.sender]"
+                >
+                    <span class="message-label">{{ msg.label }}</span>
+                    <div :class="['message', msg.sender]">{{ msg.text }}</div>
+                </div>
             </section>
+
+            <form
+                id="chat-form"
+                class="perguntas"
+                aria-label="Formulário de perguntas"
+                @submit.prevent="handleSubmit"
+            >
+                <input
+                    id="user-input"
+                    ref="userInputRef"
+                    type="text"
+                    v-model="userInput"
+                    placeholder="Digite sua dúvida sobre meio ambiente..."
+                    autocomplete="off"
+                    :disabled="isSending"
+                    required
+                />
+                <button type="submit" :disabled="isSending || !userInput.trim()">
+                    {{ isSending ? "Pensando..." : "Enviar" }}
+                </button>
+            </form>
 
             <aside class="globe-container" aria-label="Globo interativo">
                 <iframe
@@ -75,12 +91,12 @@
 
             <div class="info-action">
                 <a href="./assets/infopage.html" class="infobtn"
-                    >Conheça mais sobre o Meio Ambiente.</a
-                >
+                    >Conheça mais sobre o Meio Ambiente.</a>
             </div>
         </main>
 
-        <script src="./assets/js/config-exemple.js" defer></script>
-        <script src="./assets/js/ai.js" defer></script>
+        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+        <script src="./assets/js/config.js"></script>
+        <script type="module" src="./assets/js/app.js"></script>
     </body>
 </html>

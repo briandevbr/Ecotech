@@ -1,4 +1,4 @@
-/* ---------- Variáveis ---------- */
+
 :root {
     --bg: #000;
     --text: #fff;
@@ -7,7 +7,6 @@
     --font-sans: 'Montserrat', sans-serif;
 }
 
-/* ---------- Base ---------- */
 *,
 *::before,
 *::after {
@@ -27,14 +26,13 @@ body {
     overflow: hidden;
 }
 
-/* ---------- Animações ---------- */
-/* Estado inicial: tudo invisível */
-.reveal,
+.reveal{
+    opacity: 1;
+}
 .splash {
     opacity: 0;
 }
 
-/* Quando a página carrega, cada elemento roda a sua animação */
 .is-loaded .reveal {
     animation: fade-in 1.4s ease-out var(--delay, 0s) both;
 }
@@ -82,10 +80,7 @@ body {
     }
 }
 
-/* ---------- Linha do tempo (atrasos) ---------- */
-.gallery__item--main {
-    --delay: 4s;
-}
+.gallery__item--main,
 .gallery__item--side {
     --delay: 4s;
 }
@@ -96,7 +91,6 @@ body {
     --delay: 5.8s;
 }
 
-/* ---------- Logo de abertura ---------- */
 .splash {
     position: fixed;
     inset: 0;
@@ -112,7 +106,6 @@ body {
     height: auto;
 }
 
-/* ---------- Header ---------- */
 .header {
     position: fixed;
     top: 0;
@@ -165,13 +158,11 @@ body {
     opacity: 1;
 }
 
-/* ---------- Hero ---------- */
 .hero {
     position: relative;
     height: 100vh;
 }
 
-/* ---------- Galeria de fotos ---------- */
 .gallery {
     position: absolute;
     inset: var(--header-h) 0 0;
@@ -184,7 +175,6 @@ body {
 .gallery__item {
     margin: 0;
     overflow: hidden;
-    /* esmaece a parte de baixo da foto até sumir */
     -webkit-mask-image: linear-gradient(to bottom, #000 60%, transparent 100%);
     mask-image: linear-gradient(to bottom, #000 60%, transparent 100%);
 }
